@@ -1,17 +1,31 @@
 <template>
     <div>
-        <h2>首页</h2>
+        <nav-bar class="nav-bar">
+            <div slot="center">购物街</div>
+        </nav-bar>
+        <home-swiper :banners="banners"></home-swiper>
     </div>
 </template>
 
 <script>
+import NavBar from 'components/common/navbar/navbar.vue'
+import HomeSwiper from './chlicomps/homeswiper.vue'
+import { getHomeMul } from 'network/home'
+
 export default {
     name: 'VueHome',
 
     data() {
         return {
-            
+            banners: [],
+            recommends: []
         };
+    },
+
+    components: {
+        NavBar,
+        HomeSwiper
+        
     },
 
     mounted() {
@@ -21,9 +35,20 @@ export default {
     methods: {
         
     },
+    created() {
+        getHomeMul().then(res => {
+            this.banners = res.data.banner.list
+            this.recommends = res.data.recommend.list
+        })
+    }
+
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 
+.nav-bar {
+    color: #fff;
+    background-color: var(--color-tint);
+  }
 </style>

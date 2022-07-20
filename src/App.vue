@@ -9,11 +9,12 @@ import MianTabBar from 'components/content/miantabbar.vue'
 export default {
   name: 'App',
   components: {
-    MianTabBar
+    MianTabBar,
   }
 }
 </script>
 
 <style>
   @import url(assets/css/base.css);
+
 </style>
