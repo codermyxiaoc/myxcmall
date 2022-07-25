@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MianTabBar from 'components/content/miantabbar.vue'
+import MianTabBar from 'components/content/miantabbar/miantabbar.vue'
 export default {
   name: 'App',
   components: {

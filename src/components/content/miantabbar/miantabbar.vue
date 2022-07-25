@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import TabBar from '../common/tabbar/tabbar.vue'
-import TabBarItme from '../common/tabbar/tabbaritme.vue'
+import TabBar from '../../common/tabbar/tabbar.vue'
+import TabBarItme from '../../common/tabbar/tabbaritme.vue'
 
 export default {
     name: 'VueMiantabbar',
