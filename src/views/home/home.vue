@@ -3,16 +3,19 @@
         <nav-bar class="nav-bar">
             <div slot="center">购物街</div>
         </nav-bar>
-        <scroll class="content" 
-            :probeType="3" 
-            :pullingUp="true"
-            @scrollpos="scrollpos" 
-            @pullingUp="pullingUp"
+        <bat-control 
+        class="batcontrol" 
+        @tabclick='tabclick' 
+        :titles="['流行','新款','精选']" 
+        ref="tabcontrol1"
+        v-show="istabtop"></bat-control>
+        <scroll class="content" :probeType="3" :pullingUp="true" @scrollpos="scrollpos" @pullingUp="pullingUp"
             ref="content">
-            <home-swiper :banners="banners"></home-swiper>
+            <home-swiper :banners="banners" @swiperimgload="swiperimgload"></home-swiper>
             <recommend-view :recommends="recommends"></recommend-view>
             <feature-view></feature-view>
-            <bat-control class="bat-control" @tabclick='tabclick' :titles="['流行','新款','精选']"></bat-control>
+            <bat-control  @tabclick='tabclick' :titles="['流行','新款','精选']"
+                ref="tabcontrol2"></bat-control>
             <goods-inst :goodsinst="showgoods"></goods-inst>
         </scroll>
         <back-top @click.native="backclick" v-show="istopshow"></back-top>
@@ -29,6 +32,7 @@ import RecommendView from './chlicomps/RecommendView.vue';
 import FeatureView from './chlicomps/featureview.vue';
 import scroll from 'components/common/scroll/scroll.vue';
 import backTop from 'components/content/backtop/backtop.vue';
+import debounce from 'common/tool/debounce.js'
 
 import { getHomeMul, getHomeGood } from 'network/home'
 
@@ -46,7 +50,9 @@ export default {
                 'sell': { page: 0, list: [] },
             },
             currentType: 'pop',
-            istopshow: false
+            istopshow: false,
+            taboffsettop: 0,
+            istabtop: false
         };
     },
 
@@ -59,7 +65,7 @@ export default {
     GoodsInst,
     scroll,
     backTop
-},
+    },
 
   
 
@@ -71,14 +77,26 @@ export default {
         this.getHomeGood('sell')
     },
 
+    mounted()
+    {
+        const refresh = debounce(this.$refs.content.refresh,200)
+        this.$bus.$on('itemimgload',() => {
+            refresh()
+        })   
+    },
+
     methods: {
+        swiperimgload() {
+            this.taboffsettop = this.$refs.tabcontrol2.$el.offsetTop
+        },
         pullingUp() {
             this.getHomeGood(this.currentType)
             this.$refs.content.refresh()
             this.$refs.content.finishPullUp()
         },
         scrollpos(position) {
-           this.istopshow = position.y<=-1000
+            this.istopshow = position.y<=-1000
+            this.istabtop = position.y<=-this.taboffsettop
         },
         getHomeMul() {
             getHomeMul().then(res => {
@@ -109,7 +127,10 @@ export default {
                     this.currentType = 'sell'
                     break
             }
-        }
+            this.$refs.tabcontrol1.currentindex = index
+            this.$refs.tabcontrol2.currentindex = index
+
+        },
     },
     computed: {
         showgoods() {
@@ -123,6 +144,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 
 
 
@@ -143,9 +165,11 @@ export default {
     z-index: 9;
   }
 
-  .bat-control {
-    position: sticky;
+  .batcontrol {
+    position: fixed;
     top: 44px;
+    right: 0;
+    left: 0;
     z-index: 9;
   }
 

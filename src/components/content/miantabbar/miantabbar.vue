@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-view></router-view>
+        
         <tab-bar>
             <tab-bar-itme path="/home" >
                 <img slot="tab-iocn" src="~assets/img/tabbar/home_light.png" alt="">

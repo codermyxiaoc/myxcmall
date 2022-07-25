@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <mian-tab-bar></mian-tab-bar>
   </div>
 </template>

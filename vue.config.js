@@ -11,5 +11,6 @@ module.exports = defineConfig({
     .set('network', resolve('./src/network'))
     .set('components', resolve('./src/components'))
     .set('views', resolve('./src/views'))
+    .set('common',resolve('./src/common'))
   }
 })

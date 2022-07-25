@@ -50,15 +50,15 @@ export default {
 
     methods: {
         scrollTo(x , y, itme=500) {
-            this.BSinstance.scrollTo( x, y, itme)
+            this.BSinstance && this.BSinstance.scrollTo( x, y, itme)
         },
         finishPullUp() {
             setTimeout(() => {
-                this.BSinstance.finishPullUp()
+                this.BSinstance && this.BSinstance.finishPullUp()
             }, 2000);
         },
         refresh() {
-            this.BSinstance.refresh()
+            this.BSinstance && this.BSinstance.refresh()
         }
         
     },
