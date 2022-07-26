@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <keep-alive>
+    <keep-alive exclude="MyxcmallDetail">
       <router-view></router-view>
     </keep-alive>
     <mian-tab-bar></mian-tab-bar>

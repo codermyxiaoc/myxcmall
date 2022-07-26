@@ -32,7 +32,7 @@ import RecommendView from './chlicomps/RecommendView.vue';
 import FeatureView from './chlicomps/featureview.vue';
 import scroll from 'components/common/scroll/scroll.vue';
 import backTop from 'components/content/backtop/backtop.vue';
-import debounce from 'common/tool/debounce.js'
+import { debounce } from 'common/tool/debounce.js'
 
 import { getHomeMul, getHomeGood } from 'network/home'
 
@@ -52,7 +52,8 @@ export default {
             currentType: 'pop',
             istopshow: false,
             taboffsettop: 0,
-            istabtop: false
+            istabtop: false,
+            leavedoty: 0
         };
     },
 
@@ -138,6 +139,13 @@ export default {
         },
        
 
+    },
+    activated() {
+        this.$refs.content.refresh()
+        this.$refs.content.scrollTo(0,this.leavedoty,0)
+    },
+    deactivated() {
+        this.leavedoty = this.$refs.content.BSinstance.y
     },
 
 };

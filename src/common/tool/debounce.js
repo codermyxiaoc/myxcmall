@@ -1,4 +1,4 @@
-export default function debounce(func, wait) {
+export  function debounce(func, wait) {
     let time = null
     return function (...arge) {
         if (time) clearTimeout(time)

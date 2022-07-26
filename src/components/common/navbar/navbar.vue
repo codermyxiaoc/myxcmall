@@ -33,10 +33,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 .nav-bar {
     display: flex;
     line-height: 44px;
     text-align: center;
+    box-shadow: 0px 1px 1px rgba(100, 100, 100, 0.2);
 }
 .left, .right {
     width: 60px;
