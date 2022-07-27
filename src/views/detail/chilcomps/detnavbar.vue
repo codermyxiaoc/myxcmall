@@ -35,6 +35,7 @@ export default {
     methods: {
         currentavtive(index) {
             this.currentindex = index
+            this.$emit('navclick',this.currentindex)
         },
         backclick() {
             this.$router.go(-1)

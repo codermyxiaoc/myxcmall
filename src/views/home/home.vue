@@ -32,7 +32,7 @@ import RecommendView from './chlicomps/RecommendView.vue';
 import FeatureView from './chlicomps/featureview.vue';
 import scroll from 'components/common/scroll/scroll.vue';
 import backTop from 'components/content/backtop/backtop.vue';
-import { debounce } from 'common/tool/debounce.js'
+import { itemListenerMixin } from 'common/mixin/mixin';
 
 import { getHomeMul, getHomeGood } from 'network/home'
 
@@ -53,7 +53,7 @@ export default {
             istopshow: false,
             taboffsettop: 0,
             istabtop: false,
-            leavedoty: 0
+            leavedoty: 0,
         };
     },
 
@@ -68,7 +68,7 @@ export default {
     backTop
     },
 
-  
+    mixins: [itemListenerMixin],
 
     created() {
         this.getHomeMul(),
@@ -80,10 +80,7 @@ export default {
 
     mounted()
     {
-        const refresh = debounce(this.$refs.content.refresh,200)
-        this.$bus.$on('itemimgload',() => {
-            refresh()
-        })   
+       
     },
 
     methods: {
@@ -146,6 +143,7 @@ export default {
     },
     deactivated() {
         this.leavedoty = this.$refs.content.BSinstance.y
+        this.$bus.$off('itemimgload', this.itemImgListener)
     },
 
 };

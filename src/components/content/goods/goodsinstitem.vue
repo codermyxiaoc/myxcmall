@@ -1,6 +1,6 @@
 <template>
     <div class="goodsitem" @click="detclick">
-        <img :src="goodsitem.show.img" alt="" @load="itemimgload">
+        <img :src="isimg" alt="" @load="itemimgload">
         <div class="goods-info">
             <p>{{ goodsitem.title }}</p>
             <span class="price">￥{{goodsitem.price}}</span>
@@ -15,7 +15,7 @@ export default {
 
     data() {
         return {
-            
+
         };
     },
     props: {
@@ -26,6 +26,13 @@ export default {
             }
         }
     },
+    computed: {
+        isimg() {
+            return  this.goodsitem.image || this.goodsitem.show.img
+        }
+            
+    },
+    
 
     mounted() {
         
@@ -44,7 +51,7 @@ export default {
             })
         }
     },
-};
+}
 </script>
 
 <style lang="css" scoped>

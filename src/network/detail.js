@@ -5,7 +5,13 @@ export function detaildata(iid) {
         url: '/detail',
         params: {
             iid
+            
         }
+    })
+}
+export function getrecommend() {
+    return requestone({
+        url: '/recommend'
     })
 }
 export class goodsInfo {
@@ -18,5 +24,22 @@ export class goodsInfo {
         this.color = iteminfo.discountBgColor
         this.columns = columns
         this.services = shopInfo.services
+    }
+}
+export class merchantInfo {
+    constructor(shopInfo) {
+        this.shopLogo = shopInfo.shopLogo
+        this.score = shopInfo.score
+        this.cSells = shopInfo.cSells
+        this.cGoods = shopInfo.cGoods
+        this.cFans = shopInfo.cFans
+        this.name = shopInfo.name
+    }
+} 
+export class goodsparam {
+    constructor(info,rule) {
+        this.images  = info.images ? info.images[0] : ''
+        this.infos = info.set
+        this.sizes = rule.tables
     }
 }

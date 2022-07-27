@@ -17,7 +17,6 @@
                 <img :src="goods.services[itme-1].icon" alt="">
                 {{ goods.services[itme-1].name }}
             </span>
-
         </div>
     </div>
 </template>
@@ -62,13 +61,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
-
-
 .baseinfo {
-    margin-left: 6px;
-    margin-right: 6px;
+    padding: 0 8px;
     position: relative;
+    border-bottom: 5px solid #f2f5f8;
 }
 
 .title{
@@ -112,19 +108,20 @@ export default {
 }
 
 .freightage {
-    margin-top: 25px;
+    line-height: 60px;
     font-size: 13px;
     display: flex;
     justify-content: space-between;
     position: relative;
+
 }
 .freightage img {
     height: 14px;
     position: relative;
     top: 3px;
     left: 1px;
-
 }
+
 
 
 </style>
